@@ -1,7 +1,7 @@
 # 拉取规则
 
 
-```ql ql repo https://github.com/lty888/123.git "jd_|m_|pkc_|magic.js|zxd.jd" "" "jdCookie.js|USER_AGENTS.js|sendNotify.js"
+```pythonql repo https://github.com/lty888/123.git "jd_|m_|pkc_|magic.js|zxd.jd" "" "jdCookie.js|USER_AGENTS.js|sendNotify.js"
 
 ** 上传脚本需加前缀jd_|m_ **
 
