@@ -6,12 +6,14 @@ const {format} = require("date-fns");
 const notify = require('./sendNotify');
 const jdCookieNode = require('./jdCookie.js');
 const CryptoJS = require("crypto-js");
+const request = require('request');
 
 let cookies = [];
 let testMode = process.env.TEST_MODE?.includes('on') ? true
     : __dirname.includes("magic")
 
 let mode = process.env.MODE ? process.env.MODE : "local"
+let pandaToken=process.env.PANDATOKEN?process.env.PANDATOKEN:'';
 
 let wxBlackCookiePin = process.env.M_WX_BLACK_COOKIE_PIN
     ? process.env.M_WX_BLACK_COOKIE_PIN : ''
@@ -89,6 +91,7 @@ function uuid(x = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx") {
         return n.toString(36)
     })
 }
+
 function getSignfromPanda(functionId, body) {
     var strsign = '';
 	let data = {
