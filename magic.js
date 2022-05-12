@@ -89,6 +89,35 @@ function uuid(x = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx") {
         return n.toString(36)
     })
 }
+function getSignfromPanda(functionId, body) {
+    var strsign = '';
+	let data = {
+      "fn":functionId,
+      "body": body
+    }
+    //console.log(JSON.stringify(data))
+    return new Promise(function(resolve) {
+            //var requestData = params
+            request({
+                url: "https://api.zhezhe.cf/jd/sign",
+                method: "POST",
+                json: true,
+                headers: {
+		        'Content-Type': 'application/json;charset=utf-8',
+		        'Authorization': 'Bearer '+pandaToken
+                },
+                body:data
+            }, function (error, response, body) {
+                console.log(body)
+                if (!error && response.statusCode == 200) {
+                    strsign={fn: body.data.fn, sign: body.data.sign};
+                    //console.log(strsign)
+                    resolve(strsign);
+                }
+                
+            });
+        })
+    }
 
 class Env {
     constructor(name) {
@@ -851,11 +880,13 @@ class Env {
 
     async sign(fn, body = {}) {
         let b = {"fn": fn, "body": body};
-        let h = {"key": "fMQ8sw1y5zF4RZgT"}
         try {
-            let {data} = await this.request(`http://http://imagic.eu.org:17840/sign`,
-                h, b);
-            return {fn: data.fn, sign: data.body};
+            return getSignfromPanda(fn,body)
+        //let h = {"key": "fMQ8sw1y5zF4RZgT"}
+        //try {
+        //    let {data} = await this.request(`http://http://imagic.eu.org:17840/sign`,
+        //      h, b);
+        //    return {fn: data.fn, sign: data.body};
         } catch (e) {
             console.log("sign接口异常")
             //console.log("请自行配置sign实现")
