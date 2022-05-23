@@ -13,7 +13,7 @@ let testMode = process.env.TEST_MODE?.includes('on') ? true
     : __dirname.includes("magic")
 
 let mode = process.env.MODE ? process.env.MODE : "local"
-let pandaToken=process.env.PandaToken?process.env.PandaToken:'';
+let pandaToken=process.env.PANDATOKEN?process.env.PANDATOKEN:'';
 
 let wxBlackCookiePin = process.env.M_WX_BLACK_COOKIE_PIN
     ? process.env.M_WX_BLACK_COOKIE_PIN : ''
